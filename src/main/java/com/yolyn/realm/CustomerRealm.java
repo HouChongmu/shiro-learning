@@ -8,6 +8,7 @@ import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.ByteSource;
 
 /**
  * @author Yolyn
@@ -37,8 +38,8 @@ public class CustomerRealm extends AuthorizingRealm {
         String principal =(String)token.getPrincipal();
         System.out.println("用户名："+principal);
         if ("yolyn".equals(principal)){
-            //第一个参数：返回数据库中正确的用户名，第二个参数返回数据库中正确密码，第三个参数提供当前realm的名字
-            SimpleAuthenticationInfo simpleAuthenticationInfo=new SimpleAuthenticationInfo(principal,"123",this.getName());
+            //第一个参数：返回数据库中正确的用户名，第二个参数返回数据库中正确密码，第三个参数是注册时的随机盐，第四个参数提供当前realm的名字
+            SimpleAuthenticationInfo simpleAuthenticationInfo=new SimpleAuthenticationInfo(principal,"123", this.getName());
             return simpleAuthenticationInfo;
         }
         return null;
